@@ -1,42 +1,42 @@
 import React, { useState,useEffect} from 'react'
-import BookService from '../services/BookService'
-import {Typography} from '@mui/material'
+import useTable from "../hooks/toolTable";
 import {Table,TableContainer,TableHead,TableBody,TableRow,TableCell,Paper} from '@mui/material'
+import TableFooter from './TableFooter/footerIndex';
+
+
 
 const ListBookComponent = () => {
-    const [books, setBooks] = useState([])
-    useEffect(() => {
-        BookService.getAllBooks().then((response)=>{
-            setBooks(response.data)
-            console.log(response.data);
-        }).catch(error=>{
-            console.log(error);
-        })
-    }, [])
+    const [page, setPage] = useState(1);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
+    const { slice, range } = useTable(page, rowsPerPage);
     
 
   return (
     <div>
         <TableContainer component={Paper} sx={{maxHeight: '300px'}}>
             <Table aria-aria-label='simple table' stickyHeader>
-                <TableHead><TableRow><TableCell colSpan={4} align='center'>List of books</TableCell></TableRow>
+                <TableHead>
+                    <TableRow><TableCell colSpan={4} align='center'>List of books</TableCell></TableRow>
                     <TableRow><TableCell>Reference</TableCell><TableCell>Name</TableCell><TableCell>Author</TableCell><TableCell>Release date</TableCell></TableRow>
                 </TableHead>
                 <TableBody>
                     {
-                        books.map(
-                            book=>
+                        slice.map(
+                            (book)=>(
                             <TableRow key={book.id}>
                                 <TableCell>{book.id}</TableCell>
                                 <TableCell>{book.title}</TableCell>
                                 <TableCell>{book.author}</TableCell>
                                 <TableCell>{book.releaseDate}</TableCell>
                             </TableRow>
+                            )
                         )
                     }
                 </TableBody>
             </Table>
+            
         </TableContainer>
+        <TableFooter range={range} slice={slice} setPage={setPage} page={page} />
     </div>
   )
 }

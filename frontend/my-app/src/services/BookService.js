@@ -5,7 +5,7 @@ const BOOK_REST_API_URL='http://localhost:8080/api/books/getAllBooks';
 export const API = axios.create({
     baseURL: "${uriChecker()}",
     headers: {
-        'Access-Control-Allow-Credentials': true,
+        'Access-Control-Allow-Credentials': false,
         'Access-Control-Allow-Origin': 'http://localhost:8080',
         'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
         'Access-Control-Allow-Headers':
