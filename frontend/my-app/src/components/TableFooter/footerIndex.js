@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-
+import {Button,FormGroup,FormControlLabel,Switch} from '@mui/material'
 import styles from "./footerIndex.css";
 
-const TableFooter = ({ range, setPage, page, slice }) => {
+const TableFooter = ({ range, setPage, page, slice, alpha }) => {
   useEffect(() => {
    // if (slice.length < 1 && page !== 1) {
      // setPage(page - 1);
@@ -10,13 +10,14 @@ const TableFooter = ({ range, setPage, page, slice }) => {
   }, [slice, page, setPage]);
   return (
     <div className={styles.tableFooter}>
-        <button key={page-1} onClick={() => {if(page>1){setPage(page-1)}}}>
+        <Button key={page-1} onClick={() => {if(page>1){setPage(page-1)}}}>
         Previous
-        </button>
-        <button key={page+1} onClick={() => {if(page<range.length){setPage(page+1)}}}>
+        </Button>
+        <Button key={page+1} onClick={() => {if(page<range.length){setPage(page+1)}}}>
         Next
-        </button>
+        </Button>
         <p>Page {page} on {range.length}</p>
+        <Switch onChange={(e) => this.setState(prevState => ({alpha: !prevState.alpha}))}/>
       
     </div>
   );

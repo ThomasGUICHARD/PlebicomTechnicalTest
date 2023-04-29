@@ -8,7 +8,9 @@ import TableFooter from './TableFooter/footerIndex';
 const ListBookComponent = () => {
     const [page, setPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const { slice, range } = useTable(page, rowsPerPage);
+    const [alpha, setAlpha] = useState(false);
+    const { slice, range } = useTable(page, rowsPerPage, alpha);
+    
     
 
   return (
@@ -36,7 +38,7 @@ const ListBookComponent = () => {
             </Table>
             
         </TableContainer>
-        <TableFooter range={range} slice={slice} setPage={setPage} page={page} />
+        <TableFooter range={range} slice={slice} setPage={setPage} page={page} alpha={alpha} />
     </div>
   )
 }

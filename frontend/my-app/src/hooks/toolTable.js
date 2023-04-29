@@ -15,13 +15,13 @@ const calculateRange = (data, rowsPerPage) => {
     return data.slice((page - 1) * rowsPerPage, page * rowsPerPage);
   };
 
-  const useTable = (page, rowsPerPage) => {
+  const useTable = (page, rowsPerPage,alpha) => {
     const [tableRange, setTableRange] = useState([]);
     const [slice, setSlice] = useState([]);
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        BookService.getAllBooks().then((response)=>{
+        BookService.getAllBooks(alpha).then((response)=>{
             setData(response.data)
         }).catch(error=>{
             console.log(error);

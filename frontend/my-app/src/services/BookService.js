@@ -15,9 +15,9 @@ export const API = axios.create({
 
 class BookService{
 
-    async getAllBooks(){
+    async getAllBooks(alpha){
         
-        const machin = await API.get(BOOK_REST_API_URL)
+        const machin = await API.get(BOOK_REST_API_URL+"?alpha="+alpha)
         return machin
     }
 }
